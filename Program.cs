@@ -1,10 +1,14 @@
 using DataBridge.Data;
+using DataBridge.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddHttpClient<ViaCepService>();
+builder.Services.AddScoped<ViaCepService>();
 
 builder.Services.AddDbContext<SqlServerContext>(options =>
     options.UseSqlServer(
