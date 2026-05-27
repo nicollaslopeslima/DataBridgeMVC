@@ -11,7 +11,7 @@ namespace DataBridge.Models
 
         [Required]
         [MaxLength(150)]
-        public string NomeCompleto { get; set; }
+        public string NomeCompleto { get; set; } = string.Empty;
 
         [MaxLength(20)]
         public string? Telefone { get; set; }

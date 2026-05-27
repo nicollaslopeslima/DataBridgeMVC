@@ -1,7 +1,23 @@
+using DataBridge.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<SqlServerContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("SqlServer")
+    )
+);
+
+var mysqlConn = builder.Configuration.GetConnectionString("MySql");
+builder.Services.AddDbContext<MySqlContext>(options =>
+    options.UseMySql(mysqlConn,
+    ServerVersion.AutoDetect(mysqlConn)
+    )
+);
 
 var app = builder.Build();
 
@@ -15,13 +31,11 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Cliente}/{action=Index}/{id?}");
 
 app.Run();
