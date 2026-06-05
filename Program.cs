@@ -10,6 +10,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient<ViaCepService>();
 builder.Services.AddScoped<ViaCepService>();
 builder.Services.AddScoped<ClienteService>();
+builder.Services.AddScoped<IntegracaoService>();
 
 builder.Services.AddDbContext<SqlServerContext>(options =>
     options.UseSqlServer(
