@@ -1,20 +1,23 @@
-﻿@model DataBridge.Models.ClienteAntigo
+﻿@model DataBridge.Models.ClienteNovo
 
 @{
-    ViewData["Title"] = "Editar Cliente";
+    ViewData["Title"] = "Integrar Cliente";
 }
 
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2>Editar Cliente</h2>
+    <h2>Integrar Cliente</h2>
     <a asp-action="Index" class="btn btn-outline-secondary">← Voltar</a>
 </div>
 
 <div class="row">
     <div class="col-md-8">
-        <form asp-action="Edit" method="post">
+        <div class="alert alert-info">
+            Revise os dados abaixo antes de transferir para o MySQL.
+        </div>
+
+        <form asp-action="Integrated" method="post">
             @Html.AntiForgeryToken()
 
-            <input asp-for="Id" type="hidden" />
             <input asp-for="DataCadastro" type="hidden" />
 
             <div class="mb-3">
@@ -56,12 +59,12 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary">Salvar</button>
+            <button type="submit" class="btn btn-success">✔ Transferir para MySQL</button>
             <a asp-action="Index" class="btn btn-outline-secondary ms-2">Cancelar</a>
         </form>
     </div>
 </div>
 
 @section Scripts {
-    <script src="~/js/cliente/Edit.js"></script>
+    <script src="~/js/cliente/Integrated.js"></script>
 }

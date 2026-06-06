@@ -22,7 +22,8 @@ namespace DataBridge.Services
 
         public async Task TransferirAsync(ClienteNovo cliente)
         {
-            cliente.DataCadastro = DateTime.Now;
+            cliente.Id = 0;
+            cliente.DataAlteracao = DateTime.Now;
             await _mySqlContext.Clientes.AddAsync(cliente);
             await _mySqlContext.SaveChangesAsync();
         }
