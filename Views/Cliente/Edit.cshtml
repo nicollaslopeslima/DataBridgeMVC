@@ -25,7 +25,7 @@
 
             <div class="mb-3">
                 <label asp-for="Telefone" class="form-label">Telefone</label>
-                <input asp-for="Telefone" class="form-control" />
+                <input asp-for="Telefone" class="form-control" maxlength="11" placeholder="(00) 00000-0000" />
             </div>
 
             <div class="mb-3">
@@ -63,23 +63,5 @@
 </div>
 
 @section Scripts {
-    <script>
-        document.getElementById('cep').addEventListener('blur', async function () {
-            const cep = this.value.replace('-', '').trim();
-
-            if (cep.length !== 8) return;
-
-            const response = await fetch(`/Cliente/GetEnderecoPorCep?cep=${cep}`);
-
-            if (!response.ok) {
-                alert('CEP não encontrado.');
-                return;
-            }
-
-            const data = await response.json();
-            document.getElementById('endereco').value = data.logradouro;
-            document.getElementById('cidade').value = data.localidade;
-            document.getElementById('estado').value = data.uf;
-        });
-    </script>
+    <script src="~/js/cliente/edit.js"></script>
 }
