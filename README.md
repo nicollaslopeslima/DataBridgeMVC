@@ -161,6 +161,84 @@ Compile e execute o projeto pelo Visual Studio:
 Ctrl + F5
 ```
 
+# Scripts de Banco de Dados
+
+Os scripts de criação dos bancos de dados utilizados no projeto estão disponíveis abaixo.
+
+---
+
+# SQL Server - DataBridgeAntigo
+
+```sql
+USE DataBridgeAntigo;
+GO
+
+CREATE TABLE [dbo].[Clientes](
+    [Id] [int] IDENTITY(1,1) NOT NULL,
+    [NomeCompleto] [nvarchar](150) NOT NULL,
+    [Telefone] [nvarchar](20) NULL,
+    [CEP] [nvarchar](9) NULL,
+    [Endereco] [nvarchar](200) NULL,
+    [Cidade] [nvarchar](100) NULL,
+    [Estado] [nvarchar](2) NULL,
+    [DataCadastro] [datetime] NOT NULL,
+    [Ativo] [bit] NOT NULL,
+
+    PRIMARY KEY CLUSTERED
+    (
+        [Id] ASC
+    )
+    WITH (
+        PAD_INDEX = OFF,
+        STATISTICS_NORECOMPUTE = OFF,
+        IGNORE_DUP_KEY = OFF,
+        ALLOW_ROW_LOCKS = ON,
+        ALLOW_PAGE_LOCKS = ON,
+        OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF
+    ) ON [PRIMARY]
+
+) ON [PRIMARY];
+GO
+
+ALTER TABLE [dbo].[Clientes]
+ADD DEFAULT (GETDATE()) FOR [DataCadastro];
+GO
+
+ALTER TABLE [dbo].[Clientes]
+ADD DEFAULT ((1)) FOR [Ativo];
+GO
+```
+
+---
+
+# MySQL - DataBridgeNovo
+
+```sql
+USE DataBridgeNovo;
+
+CREATE TABLE clientes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome_completo VARCHAR(150) NOT NULL,
+    telefone VARCHAR(20) NULL,
+    cep VARCHAR(9) NULL,
+    endereco VARCHAR(200) NULL,
+    cidade VARCHAR(100) NULL,
+    estado VARCHAR(2) NULL,
+    data_cadastro DATETIME NOT NULL,
+    data_alteracao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    ativo TINYINT(1) NOT NULL DEFAULT 1
+);
+```
+
+---
+
+# Execução
+
+1. Execute o script do SQL Server utilizando o SQL Server Management Studio (SSMS).
+2. Execute o script do MySQL utilizando o MySQL Workbench.
+3. Após a criação dos bancos e tabelas, configure as connection strings da aplicação.
+
+
 ---
 
 # Objetivos Acadêmicos
